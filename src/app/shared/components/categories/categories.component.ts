@@ -10,16 +10,10 @@ import {
   lucideShoppingBasket,
   lucideVenus,
 } from '@ng-icons/lucide';
-
-interface Category {
-  name: string;
-  icon: string;
-  slug: string;
-}
+import { data, Category } from './categories.model';
 
 @Component({
   selector: 'categories',
-  templateUrl: './categories.html',
   standalone: true,
   imports: [NgIcon],
   viewProviders: [
@@ -33,60 +27,34 @@ interface Category {
       lucideVenus,
     }),
   ],
+  template: `
+    <div
+      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-2 bg-gray-100 p-2 rounded-lg mb-4 text-sm"
+    >
+      @for (category of categories(); track category.slug) {
+      <div
+        class="flex items-center justify-center gap-2 cursor-pointer px-2 py-1 rounded-md"
+        [class]="category.slug === selectedCategory() ? 'bg-white' : 'text-gray-500'"
+        (click)="handleChange(category.slug)"
+      >
+        <ng-icon [name]="category.icon" />
+        {{ category.name }}
+      </div>
+      } @empty {
+      <div class="col-span-full text-center text-gray-500">No categories available</div>
+      }
+    </div>
+  `,
 })
 export class Categories {
-  categories = signal<Category[]>([
-    {
-      name: 'All',
-      icon: 'lucideShoppingBasket',
-      slug: 'all',
-    },
-    {
-      name: 'T-shirts',
-      icon: 'lucideShirt',
-      slug: 't-shirts',
-    },
-    {
-      name: 'Shoes',
-      icon: 'lucideFootprints',
-      slug: 'shoes',
-    },
-    {
-      name: 'Accessories',
-      icon: 'lucideGlasses',
-      slug: 'accessories',
-    },
-    {
-      name: 'Bags',
-      icon: 'lucideBriefcase',
-      slug: 'bags',
-    },
-    {
-      name: 'Dresses',
-      icon: 'lucideVenus',
-      slug: 'dresses',
-    },
-    {
-      name: 'Jackets',
-      icon: 'lucideShirt',
-      slug: 'jackets',
-    },
-    {
-      name: 'Gloves',
-      icon: 'lucideHand',
-      slug: 'gloves',
-    },
-  ]);
-
+  categories = signal<Category[]>(data);
   selectedCategory = signal<string>('all');
 
-  // Computed signal for the active category
   activeCategory = computed(() =>
     this.categories().find((cat) => cat.slug === this.selectedCategory())
   );
 
   constructor(private router: Router, private route: ActivatedRoute) {
-    // Update selectedCategory signal when URL params change
     this.route.queryParams.subscribe((params) => {
       this.selectedCategory.set(params['category'] || 'all');
     });
@@ -95,16 +63,13 @@ export class Categories {
   handleChange(value: string) {
     const currentUrl = this.router.url.split('?')[0];
     const params = new URLSearchParams(window.location.search);
-
     if (value === 'all') {
       params.delete('category');
     } else {
       params.set('category', value);
     }
-
     const queryString = params.toString();
     const newUrl = queryString ? `${currentUrl}?${queryString}` : currentUrl;
-
     // Update the signal and navigate
     this.selectedCategory.set(value);
     this.router.navigateByUrl(newUrl);

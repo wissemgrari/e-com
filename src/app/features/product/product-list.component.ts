@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Categories } from '../../shared/components/categories/categories';
+import { Categories } from '../../shared/components/categories/categories.component';
 import { ProductItem } from './product-item.component';
 
 @Component({

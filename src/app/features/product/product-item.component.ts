@@ -53,7 +53,7 @@ export class ProductItem {
     };
 
     this.cartService.addToCart(cartItem);
-    this.toastService.warning('Product added to cart');
+    this.toastService.success('Product added to cart');
     console.log('Product added to cart:', cartItem);
   }
 }

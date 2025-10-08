@@ -1,9 +1,10 @@
-import { Component, Input, signal } from '@angular/core';
-import {NgOptimizedImage, NgStyle} from '@angular/common';
+import { Component, inject, Input, signal } from '@angular/core';
+import { NgOptimizedImage, NgStyle } from '@angular/common';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideShoppingCart } from '@ng-icons/lucide';
 import { CartItem, Product, ProductSelection } from './product.model';
 import { CartService } from '../../core/services/cart.service';
+import { ToastService } from '../../shared/components/toast/toast.service';
 
 @Component({
   selector: 'product-item',
@@ -13,6 +14,7 @@ import { CartService } from '../../core/services/cart.service';
 })
 export class ProductItem {
   @Input({ required: true }) product!: Product;
+  private toastService = inject(ToastService);
 
   // Signal for product selection state
   productSelection = signal<ProductSelection>({
@@ -51,9 +53,7 @@ export class ProductItem {
     };
 
     this.cartService.addToCart(cartItem);
-
-    // Optional: Show toast notification (install ngx-toastr)
-    // this.toastr.success('Product added to cart');
+    this.toastService.warning('Product added to cart');
     console.log('Product added to cart:', cartItem);
   }
 }

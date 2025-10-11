@@ -4,14 +4,15 @@ import { lucideHouse, lucideBell, lucideShoppingCart } from '@ng-icons/lucide';
 import { Searchbar } from '../searchbar/searchbar.component';
 import { NgOptimizedImage } from '@angular/common';
 import { CartService } from '../../../core/services/cart.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'navbar',
-  imports: [NgIcon, Searchbar, NgOptimizedImage],
+  imports: [NgIcon, Searchbar, NgOptimizedImage, RouterLink],
   viewProviders: [provideIcons({ lucideHouse, lucideBell, lucideShoppingCart })],
   template: `
     <nav class="w-full flex items-center justify-between border-b border-gray-200 pb-4">
-      <a href="/" class="flex items-center">
+      <a routerLink="/" class="flex items-center">
         <img
           ngSrc="/logo.png"
           alt="TrendLama"
@@ -23,19 +24,19 @@ import { CartService } from '../../../core/services/cart.service';
       </a>
       <div class="flex items-center gap-6">
         <searchbar />
-        <a href="/">
+        <a routerLink="/">
           <ng-icon name="lucideHouse" size="1rem" color="#4a5565" />
         </a>
         <ng-icon name="lucideBell" size="1rem" color="#4a5565" />
-        <div class="relative">
+        <a routerLink="cart" class="relative cursor-pointer">
           <ng-icon name="lucideShoppingCart" size="1rem" color="#4a5565" />
           <span
             class="absolute -top-2.5 -right-2.5 bg-amber-400 text-gray-600 rounded-full w-4 h-4 flex items-center justify-center text-xs font-medium"
           >
             {{ cartCounts() }}
           </span>
-        </div>
-        <a href="/login">Sign in</a>
+        </a>
+        <a routerLink="/login">Sign in</a>
       </div>
     </nav>
   `,

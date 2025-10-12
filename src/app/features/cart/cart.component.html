@@ -1,0 +1,37 @@
+<h1 class="text-2xl font-semibold text-center mb-10">Your Shopping Cart</h1>
+<!-- Step Indicator -->
+<div class="flex items-center justify-center mb-8">
+  <div class="flex items-center">
+    <div class="flex items-center gap-x-2">
+      <div [class]="getStepClass(1)">1</div>
+      <p class="text-lg font-medium">Cart</p>
+    </div>
+    <div class="w-20 h-0.5 bg-gray-300 mx-2"></div>
+    <div class="flex items-center gap-x-2">
+      <div [class]="getStepClass(2)">2</div>
+      <p class="text-lg font-medium">Shipping</p>
+    </div>
+    <div class="w-20 h-0.5 bg-gray-300 mx-2"></div>
+    <div class="flex items-center gap-x-2">
+      <div [class]="getStepClass(3)">3</div>
+      <p class="text-lg font-medium">Payment</p>
+    </div>
+  </div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-5 gap-10">
+  <!-- Main Content -->
+  <div class="col-span-3">
+    @switch (currentStep()) { @case (1) {
+    <cart-list (next)="goToStep(2)" />
+    } @case (2) {
+    <shipping-form (next)="handleShippingSubmit($event)" (back)="goToStep(1)" />
+    } @case (3) {
+    <payment-form (submit)="handlePaymentSubmit($event)" (back)="goToStep(2)" />
+    } }
+  </div>
+
+  <!-- Sidebar Summary -->
+  <div class="col-span-2">
+    <cart-summary />
+  </div>
+</div>

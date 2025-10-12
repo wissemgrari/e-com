@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';
   imports: [CartItemComponent, RouterLink],
   template: `
     <div
-      class="w-full lg:w-7/12 shadow-lg border border-gray-100 p-8 rounded-lg flex flex-col gap-8"
+      class="w-full h-full shadow-lg border border-gray-100 p-4 lg:p-8 rounded-lg flex flex-col gap-8"
     >
       @if (cartItems().length > 0) { @for (item of cartItems(); track item.id) {
       <cart-item [cartItem]="item" />

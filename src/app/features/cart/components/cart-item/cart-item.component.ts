@@ -11,21 +11,20 @@ import { CartItem } from '../../models/cart.model';
   imports: [NgOptimizedImage, NgIcon],
   providers: [provideIcons({ lucideTrash2 })],
   template: `
-    <div class="flex items-center justify-between">
-      <!--  IMAGE AND DETAILS  -->
-      <div class="flex gap-8">
-        <!--  IMAGE  -->
-        <div class="relative w-32 h-32 bg-gray-50 rounded-lg overflow-hidden">
-          <img
-            [ngSrc]="cartItem.images[cartItem.selectedColor]"
-            [alt]="cartItem.name"
-            fill
-            class="object-contain"
-          />
-        </div>
+    <div class="flex items-start gap-2 lg:gap-5">
+      <!--  IMAGE  -->
+      <div
+        class="flex-1 relative w-24 h-24 lg:w-32 lg:h-32 bg-gray-50 rounded-lg shadow overflow-hidden"
+      >
+        <img
+          [ngSrc]="cartItem.images[cartItem.selectedColor]"
+          [alt]="cartItem.name"
+          fill
+          class="object-contain"
+        />
       </div>
       <!--  ITEM DETAILS  -->
-      <div class="flex flex-col justify-between">
+      <div class="flex-3 flex flex-col justify-between">
         <div class="flex flex-col gap-1">
           <p class="text-sm font-medium">{{ cartItem.name }}</p>
           <p class="text-xs text-gray-500">Quantity: {{ cartItem.quantity }}</p>
@@ -36,8 +35,8 @@ import { CartItem } from '../../models/cart.model';
       </div>
       <!--  DELETE BUTTON  -->
       <button
-        (click)="removeFromCart(cartItem.id)"
         class="w-8 h-8 rounded-full bg-red-100 hover:bg-red-200 transition-all duration-300 text-red-400 flex items-center justify-center cursor-pointer"
+        (click)="removeFromCart(cartItem.id)"
       >
         <ng-icon name="lucideTrash2" class="w-3 h-3" />
       </button>

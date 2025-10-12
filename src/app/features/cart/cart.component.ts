@@ -8,46 +8,7 @@ import { ShippingForm } from './components/shipping-form/shipping-form.component
   selector: 'cart',
   standalone: true,
   imports: [CartList, ShippingForm, PaymentForm, CartSummary],
-  template: `
-    <div>
-      <h1 class="text-2xl font-semibold text-center mb-10">Your Shopping Cart</h1>
-      <!-- Step Indicator -->
-      <div class="flex items-center justify-center mb-8">
-        <div class="flex items-center">
-          <div class="flex items-center gap-x-2">
-            <div [class]="getStepClass(1)">1</div>
-            <p class="text-lg font-medium">Cart</p>
-          </div>
-          <div class="w-20 h-0.5 bg-gray-300 mx-2"></div>
-          <div class="flex items-center gap-x-2">
-            <div [class]="getStepClass(2)">2</div>
-            <p class="text-lg font-medium">Shipping</p>
-          </div>
-          <div class="w-20 h-0.5 bg-gray-300 mx-2"></div>
-          <div class="flex items-center gap-x-2">
-            <div [class]="getStepClass(3)">3</div>
-            <p class="text-lg font-medium">Payment</p>
-          </div>
-        </div>
-      </div>
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <!-- Main Content -->
-        <div class="lg:col-span-2">
-          @switch (currentStep()) { @case (1) {
-          <cart-list (next)="goToStep(2)" />
-          } @case (2) {
-          <shipping-form (next)="handleShippingSubmit($event)" (back)="goToStep(1)" />
-          } @case (3) {
-          <payment-form (submit)="handlePaymentSubmit($event)" (back)="goToStep(2)" />
-          } }
-        </div>
-        <!-- Sidebar Summary -->
-        <div class="lg:col-span-1">
-          <cart-summary />
-        </div>
-      </div>
-    </div>
-  `,
+  templateUrl: './cart.component.html',
 })
 export class Cart {
   currentStep = signal(1);

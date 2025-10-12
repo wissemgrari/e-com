@@ -1,4 +1,4 @@
-import { CartItem } from '../../product/product.model';
+import { CartItem } from './cart.model';
 import { ShippingDetails } from './shipping.model';
 
 export interface PaymentInfo {

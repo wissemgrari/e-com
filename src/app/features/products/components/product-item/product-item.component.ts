@@ -2,9 +2,10 @@ import { Component, inject, Input, signal } from '@angular/core';
 import { NgOptimizedImage, NgStyle } from '@angular/common';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideShoppingCart } from '@ng-icons/lucide';
-import { CartItem, Product, ProductSelection } from './product.model';
-import { CartService } from '../../core/services/cart.service';
-import { ToastService } from '../../shared/components/toast/toast.service';
+import { Product, ProductSelection } from '../../models/product.model';
+import { ToastService } from '../../../../shared/components/toast/toast.service';
+import { CartService } from '../../../../core/services/cart.service';
+import { CartItem } from '../../../cart/models/cart.model';
 
 @Component({
   selector: 'product-item',

@@ -2,20 +2,28 @@
   <!-- PRODUCT IMAGE -->
   <a [href]="'/product/' + product.id">
     <div class="relative aspect-[2/3]">
-      <img [ngSrc]="product.images[productSelection().color]" [alt]="product.name"
-           class="object-cover hover:scale-105 transition-all duration-300" fill/>
+      <img
+        [ngSrc]="product.images[productSelection().color]"
+        [alt]="product.name"
+        class="object-cover hover:scale-105 transition-all duration-300"
+        fill
+      />
     </div>
   </a>
   <!-- PRODUCT DETAILS -->
   <div class="flex flex-col gap-4 p-4">
-    <h1 class="font-medium">{{product.name}}</h1>
-    <p class="text-sm text-gray-500">{{product.shortDescription}}</p>
+    <h1 class="font-medium">{{ product.name }}</h1>
+    <p class="text-sm text-gray-500">{{ product.shortDescription }}</p>
     <div class="flex items-center gap-4 text-xs">
       <!-- SIZES -->
       <div class="flex flex-col gap-1">
         <span class="text-gray-500">Size</span>
-        <select name="size" id="size" class="ring ring-gray-300 rounded-md px-2 py-1"
-          (change)="handleProductTypeFromEvent('size', $event)">
+        <select
+          name="size"
+          id="size"
+          class="ring ring-gray-300 rounded-md px-2 py-1"
+          (change)="handleProductTypeFromEvent('size', $event)"
+        >
           @for (size of product.sizes; track size) {
           <option [value]="size">
             {{ size.toUpperCase() }}
@@ -28,10 +36,12 @@
         <span class="text-gray-500">Color</span>
         <div class="flex items-center gap-2">
           @for (color of product.colors; track color) {
-          <div class="cursor-pointer border rounded-full p-[1.2px]"
-            [class]="productSelection().color === color ? 'border-gray-400' :'border-gray-200'"
-            (click)="handleProductType('color', color)">
-            <div class="w-3.5 h-3.5 rounded-full" [ngStyle]="{'background-color': color}"></div>
+          <div
+            class="cursor-pointer border rounded-full p-[1.2px]"
+            [class]="productSelection().color === color ? 'border-gray-400' : 'border-gray-200'"
+            (click)="handleProductType('color', color)"
+          >
+            <div class="w-3.5 h-3.5 rounded-full" [ngStyle]="{ 'background-color': color }"></div>
           </div>
           }
         </div>
@@ -40,8 +50,10 @@
     <!-- PRICE AND ADD TO CART BUTTON -->
     <div class="flex items-center justify-between">
       <p class="font-medium">${{ product.price.toFixed(2) }}</p>
-      <button (click)="handleAddToCart()"
-        class="ring-1 ring-gray-200 shadow-lg rounded-md px-2.5 py-2 text-sm cursor-pointer hover:text-white hover:bg-black transition-all duration-300 flex items-center gap-2">
+      <button
+        (click)="handleAddToCart()"
+        class="ring-1 ring-gray-200 shadow-lg rounded-md px-2.5 py-2 text-sm cursor-pointer hover:text-white hover:bg-black transition-all duration-300 flex items-center gap-2"
+      >
         <ng-icon name="lucideShoppingCart" size="1rem" />
         Add to Cart
       </button>

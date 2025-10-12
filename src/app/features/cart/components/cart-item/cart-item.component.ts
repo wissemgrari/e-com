@@ -1,9 +1,9 @@
 import { Component, inject, Input } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
-import { CartItem } from '../../../product/product.model';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideTrash2 } from '@ng-icons/lucide';
 import { CartService } from '../../../../core/services/cart.service';
+import { CartItem } from '../../models/cart.model';
 
 @Component({
   selector: 'cart-item',

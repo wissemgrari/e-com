@@ -9,12 +9,6 @@ export interface Product {
   images: Record<string, string>;
 }
 
-export interface CartItem extends Product {
-  quantity: number;
-  selectedSize: string;
-  selectedColor: string;
-}
-
 export interface ProductSelection {
   size: string;
   color: string;

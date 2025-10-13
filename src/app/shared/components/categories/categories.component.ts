@@ -29,7 +29,7 @@ import { data, Category } from './categories.model';
   ],
   template: `
     <div
-      class="sticky shadow-lg top-0 z-10 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-2 bg-gray-100 p-2 rounded-lg mb-4 text-sm"
+      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-2 bg-gray-100 p-2 rounded-lg mb-4 text-sm"
     >
       @for (category of categories(); track category.slug) {
       <div

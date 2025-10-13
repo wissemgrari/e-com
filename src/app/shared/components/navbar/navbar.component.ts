@@ -11,7 +11,9 @@ import { RouterLink } from '@angular/router';
   imports: [NgIcon, Searchbar, NgOptimizedImage, RouterLink],
   viewProviders: [provideIcons({ lucideHouse, lucideBell, lucideShoppingCart })],
   template: `
-    <nav class="w-full flex items-center justify-between border-b border-gray-200 pb-4">
+    <nav
+      class="sticky top-0 z-10 bg-white w-full flex items-center justify-between border-b border-gray-200 py-3"
+    >
       <a routerLink="/" class="flex items-center">
         <img
           ngSrc="/logo.png"

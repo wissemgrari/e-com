@@ -26,7 +26,9 @@ import { CartItem } from '../../models/cart.model';
       <!--  ITEM DETAILS  -->
       <div class="flex-3 flex flex-col justify-between">
         <div class="flex flex-col gap-1">
-          <p class="text-sm font-medium">{{ cartItem.name }}</p>
+          <p class="text-sm font-medium truncate max-w-[10rem]">
+            {{ cartItem.name }}
+          </p>
           <p class="text-xs text-gray-500">Quantity: {{ cartItem.quantity }}</p>
           <p class="text-xs text-gray-500">Size: {{ cartItem.selectedSize }}</p>
           <p class="text-xs text-gray-500">Color: {{ cartItem.selectedColor }}</p>

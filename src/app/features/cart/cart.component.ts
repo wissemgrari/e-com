@@ -22,12 +22,12 @@ export class Cart {
     const isActive = this.currentStep() === step;
     const isCompleted = this.currentStep() > step;
 
-    return `w-9 h-9 rounded-full flex items-center justify-center ${
+    return `w-6 h-6 text-xs lg:w-8 lg:h-8 lg:text-base rounded-full flex items-center justify-center ${
       isActive
         ? 'bg-gray-800 text-white'
         : isCompleted
         ? 'bg-green-600 text-white'
-        : 'bg-gray-300 text-gray-600'
+        : 'bg-gray-400 text-white'
     }`;
   }
 

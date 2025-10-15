@@ -71,13 +71,20 @@ export class Cart {
     try {
       // Use checkout service to complete the order
       const order = this.checkoutService.completeOrder(items, shipping, paymentData, totalPrice);
-      // Reset processing flag after a short delay
-      setTimeout(() => this.isProcessingOrder.set(false), 1000);
-      this.toast.success('Order completed');
+
+      // Clear cart and localStorage after successful order
+      this.cartService.clearCart();
+
+      this.toast.success('Order completed successfully!');
+
+      // Optionally: Navigate to order success page
+      // this.router.navigate(['/order-success', order.orderId]);
     } catch (error) {
-      setTimeout(() => this.isProcessingOrder.set(false), 1000);
       this.toast.error('Failed to complete order. Please try again.');
       console.error('Order error:', error);
+    } finally {
+      // Reset processing flag after a short delay
+      setTimeout(() => this.isProcessingOrder.set(false), 300);
     }
   }
 }

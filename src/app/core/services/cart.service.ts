@@ -10,7 +10,7 @@ export class CartService {
   // Read-only computed values
   readonly items = this.cartItems.asReadonly();
   readonly itemCount = computed(() => this.cartItems().length);
-  readonly total = computed(() =>
+  readonly totalPrice = computed(() =>
     this.cartItems().reduce((sum, item) => sum + item.price * item.quantity, 0)
   );
 

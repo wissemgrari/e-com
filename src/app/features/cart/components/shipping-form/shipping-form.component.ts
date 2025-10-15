@@ -1,7 +1,8 @@
-import { Component, inject, output } from '@angular/core';
+import { Component, effect, inject, input, output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideArrowLeft, lucideArrowRight } from '@ng-icons/lucide';
+import { Shipping } from '../../models/shipping.model';
 
 @Component({
   selector: 'shipping-form',
@@ -152,6 +153,7 @@ import { lucideArrowLeft, lucideArrowRight } from '@ng-icons/lucide';
 export class ShippingForm {
   private fb = inject(FormBuilder);
 
+  initialData = input<Shipping | null>(null);
   next = output<any>();
   back = output<void>();
 
@@ -165,6 +167,16 @@ export class ShippingForm {
     zipCode: ['', Validators.required],
     country: ['', Validators.required],
   });
+
+  constructor() {
+    // Populate form with initial data when available
+    effect(() => {
+      const data = this.initialData();
+      if (data) {
+        this.shippingForm.patchValue(data);
+      }
+    });
+  }
 
   onSubmit() {
     if (this.shippingForm.valid) {

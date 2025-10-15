@@ -1,7 +1,7 @@
 import { CartItem } from './cart.model';
-import { ShippingDetails } from './shipping.model';
+import { Shipping } from './shipping.model';
 
-export interface PaymentInfo {
+export interface Payment {
   cardNumber: string;
   cardHolder: string;
   expiryDate: string;
@@ -10,8 +10,8 @@ export interface PaymentInfo {
 
 export interface Order {
   items: CartItem[];
-  shipping: ShippingDetails;
-  payment: PaymentInfo;
+  shipping: Shipping;
+  payment: Payment;
   total: number;
   orderId: string;
   createdAt: Date;

@@ -1,4 +1,4 @@
-import { Component, inject, output } from '@angular/core';
+import { Component, effect, inject, input, output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideArrowLeft, lucideShoppingBag } from '@ng-icons/lucide';
@@ -25,7 +25,6 @@ import { lucideArrowLeft, lucideShoppingBag } from '@ng-icons/lucide';
           <p class="text-red-500 text-xs mt-1">Valid card number is required (16 digits)</p>
           }
         </div>
-
         <!-- Cardholder Name -->
         <div>
           <label class="text-xs font-medium text-gray-500">Cardholder Name</label>
@@ -40,7 +39,6 @@ import { lucideArrowLeft, lucideShoppingBag } from '@ng-icons/lucide';
           <p class="text-red-500 text-xs mt-1">Cardholder name is required</p>
           }
         </div>
-
         <!-- Expiry Date and CVV -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
@@ -72,7 +70,7 @@ import { lucideArrowLeft, lucideShoppingBag } from '@ng-icons/lucide';
           </div>
         </div>
         <!-- Buttons -->
-        <div class="flex gap-4 pt-4">
+        <div class="flex flex-col-reverse lg:flex-row gap-4 pt-4">
           <button
             type="button"
             (click)="back.emit()"
@@ -81,16 +79,15 @@ import { lucideArrowLeft, lucideShoppingBag } from '@ng-icons/lucide';
             <ng-icon name="lucideArrowLeft" />
             <span>Back to Shipping</span>
           </button>
-
           <button
             type="submit"
-            [disabled]="paymentForm.invalid"
-            [class.opacity-50]="paymentForm.invalid"
-            [class.cursor-not-allowed]="paymentForm.invalid"
+            [disabled]="paymentForm.invalid || isProcessingOrder()"
+            [class.opacity-50]="paymentForm.invalid || isProcessingOrder()"
+            [class.cursor-not-allowed]="paymentForm.invalid || isProcessingOrder()"
             class="flex-1 bg-green-600 hover:bg-green-700 disabled:hover:bg-green-600 transition-all duration-300 text-white p-3 rounded-lg flex items-center justify-center gap-2 cursor-pointer"
           >
             <ng-icon name="lucideShoppingBag" />
-            <span>Complete Order</span>
+            <span>{{ isProcessingOrder() ? 'Processing...' : 'Complete Order' }}</span>
           </button>
         </div>
       </form>
@@ -100,8 +97,11 @@ import { lucideArrowLeft, lucideShoppingBag } from '@ng-icons/lucide';
 export class PaymentForm {
   private fb = inject(FormBuilder);
 
+  initialData = input<any>(null);
   submit = output<any>();
   back = output<void>();
+
+  isProcessingOrder = input<boolean>();
 
   paymentForm: FormGroup = this.fb.group({
     cardNumber: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
@@ -109,6 +109,16 @@ export class PaymentForm {
     expiryDate: ['', [Validators.required, Validators.pattern(/^(0[1-9]|1[0-2])\/\d{2}$/)]],
     cvv: ['', [Validators.required, Validators.pattern(/^\d{3,4}$/)]],
   });
+
+  constructor() {
+    // Populate form with initial data when available
+    effect(() => {
+      const data = this.initialData();
+      if (data) {
+        this.paymentForm.patchValue(data);
+      }
+    });
+  }
 
   onSubmit() {
     if (this.paymentForm.valid) {

@@ -24,9 +24,18 @@
     @switch (currentStep()) { @case (1) {
     <cart-list />
     } @case (2) {
-    <shipping-form (next)="handleShippingSubmit($event)" (back)="goToStep(1)" />
+    <shipping-form
+      [initialData]="shippingData()"
+      (next)="handleShippingSubmit($event)"
+      (back)="goToStep(1)"
+    />
     } @case (3) {
-    <payment-form (submit)="handlePaymentSubmit($event)" (back)="goToStep(2)" />
+    <payment-form
+      [initialData]="paymentData()"
+      [isProcessingOrder]="isProcessingOrder()"
+      (submit)="handlePaymentSubmit($event)"
+      (back)="goToStep(2)"
+    />
     } }
   </div>
 

@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { ToastService } from './toast.service';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   lucideCheck,
@@ -8,9 +7,10 @@ import {
   lucideTriangleAlert,
   lucideX,
 } from '@ng-icons/lucide';
+import { ToastService } from './toast.service';
 
 @Component({
-  selector: 'app-toast',
+  selector: 'toast',
   standalone: true,
   imports: [NgIcon],
   viewProviders: [

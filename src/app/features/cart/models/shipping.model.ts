@@ -1,5 +1,5 @@
-export interface ShippingDetails {
-  fullName: string;
+export interface Shipping {
+  name: string;
   email: string;
   phone: string;
   address: string;

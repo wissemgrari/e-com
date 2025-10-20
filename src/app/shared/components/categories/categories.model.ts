@@ -1,48 +1,45 @@
+import { ProductCategory } from '../../../features/products/models/product.model';
+
 export type Category = {
   name: string;
   icon: string;
-  slug: string;
+  slug: ProductCategory;
 };
 
-export const data = [
+export const data: Category[] = [
   {
     name: 'All',
-    icon: 'lucideShoppingBasket',
-    slug: 'all',
+    icon: 'hugeShoppingBag03',
+    slug: ProductCategory.All,
   },
   {
     name: 'T-shirts',
-    icon: 'lucideShirt',
-    slug: 't-shirts',
+    icon: 'hugeShirt01',
+    slug: ProductCategory.TShirt,
   },
   {
-    name: 'Shoes',
-    icon: 'lucideFootprints',
-    slug: 'shoes',
-  },
-  {
-    name: 'Accessories',
-    icon: 'lucideGlasses',
-    slug: 'accessories',
-  },
-  {
-    name: 'Bags',
-    icon: 'lucideBriefcase',
-    slug: 'bags',
-  },
-  {
-    name: 'Dresses',
-    icon: 'lucideVenus',
-    slug: 'dresses',
+    name: 'Hoodies',
+    icon: 'hugeHoodie',
+    slug: ProductCategory.Hoodie,
   },
   {
     name: 'Jackets',
-    icon: 'lucideShirt',
-    slug: 'jackets',
+    icon: 'hugeLongSleeveShirt',
+    slug: ProductCategory.Jacket,
   },
   {
-    name: 'Gloves',
-    icon: 'lucideHand',
-    slug: 'gloves',
+    name: 'Shoes',
+    icon: 'hugeRunningShoes',
+    slug: ProductCategory.Shoe,
+  },
+  {
+    name: 'Accessories',
+    icon: 'hugeGlasses',
+    slug: ProductCategory.Accessory,
+  },
+  {
+    name: 'Dresses',
+    icon: 'hugeDress01',
+    slug: ProductCategory.Dress,
   },
 ];

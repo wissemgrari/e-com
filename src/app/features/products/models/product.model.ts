@@ -7,6 +7,17 @@ export interface Product {
   sizes: string[];
   colors: string[];
   images: Record<string, string>;
+  category: ProductCategory;
+}
+
+export enum ProductCategory {
+  All = 'all',
+  TShirt = 't-shirt',
+  Hoodie = 'hoodie',
+  Jacket = 'jacket',
+  Shoe = 'shoe',
+  Accessory = 'accessory',
+  Dress = 'dress',
 }
 
 export interface ProductSelection {
@@ -29,6 +40,7 @@ export const products: Product[] = [
       purple: '/products/1p.png',
       green: '/products/1gr.png',
     },
+    category: ProductCategory.TShirt,
   },
   {
     id: 2,
@@ -40,6 +52,7 @@ export const products: Product[] = [
     sizes: ['s', 'm', 'l', 'xl'],
     colors: ['gray', 'green'],
     images: { gray: '/products/2g.png', green: '/products/2gr.png' },
+    category: ProductCategory.Hoodie,
   },
   {
     id: 3,
@@ -55,6 +68,7 @@ export const products: Product[] = [
       blue: '/products/3b.png',
       black: '/products/3bl.png',
     },
+    category: ProductCategory.Hoodie,
   },
   {
     id: 4,
@@ -66,6 +80,7 @@ export const products: Product[] = [
     sizes: ['s', 'm', 'l'],
     colors: ['white', 'pink'],
     images: { white: '/products/4w.png', pink: '/products/4p.png' },
+    category: ProductCategory.TShirt,
   },
   {
     id: 5,
@@ -81,6 +96,7 @@ export const products: Product[] = [
       orange: '/products/5o.png',
       black: '/products/5bl.png',
     },
+    category: ProductCategory.Hoodie,
   },
   {
     id: 6,
@@ -92,6 +108,7 @@ export const products: Product[] = [
     sizes: ['40', '42', '43', '44'],
     colors: ['gray', 'white'],
     images: { gray: '/products/6g.png', white: '/products/6w.png' },
+    category: ProductCategory.Shoe,
   },
   {
     id: 7,
@@ -103,6 +120,7 @@ export const products: Product[] = [
     sizes: ['40', '42', '43'],
     colors: ['gray', 'pink'],
     images: { gray: '/products/7g.png', pink: '/products/7p.png' },
+    category: ProductCategory.Shoe,
   },
   {
     id: 8,
@@ -114,5 +132,6 @@ export const products: Product[] = [
     sizes: ['s', 'm', 'l'],
     colors: ['blue', 'green'],
     images: { blue: '/products/8b.png', green: '/products/8gr.png' },
+    category: ProductCategory.Jacket,
   },
 ];

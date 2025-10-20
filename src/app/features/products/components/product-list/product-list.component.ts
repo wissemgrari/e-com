@@ -1,6 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
+import { ProductService } from '../../../../core/services/product.service';
 import { Categories } from '../../../../shared/components/categories/categories.component';
-import { Product, products } from '../../models/product.model';
 import { ProductItem } from '../product-item/product-item.component';
 
 @Component({
@@ -9,7 +9,7 @@ import { ProductItem } from '../product-item/product-item.component';
   template: ` <div class="w-full">
     <categories />
     <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-12">
-      @for (product of products(); track product.id) {
+      @for (product of productService.filteredProducts(); track product.id) {
       <product-item [product]="product" />
       } @empty {
       <div class="col-span-full text-center text-gray-500">No products available</div>
@@ -18,5 +18,6 @@ import { ProductItem } from '../product-item/product-item.component';
   </div>`,
 })
 export class ProductList {
-  products = signal<Product[]>(products);
+  productService = inject(ProductService);
+  showCategories = input<boolean>(true);
 }

@@ -11,24 +11,48 @@ export class ProductService {
   // Selected category filter
   private selectedCategory = signal<string>('all');
 
-  // Filtered products based on category
+  // Search query
+  private searchQuery = signal<string>('');
+
+  // Filtered products based on category and search
   readonly filteredProducts = computed(() => {
     const category = this.selectedCategory();
-    const allProds = this.allProducts();
+    const query = this.searchQuery().toLowerCase().trim();
+    let filtered = this.allProducts();
 
-    if (category === 'all') {
-      return allProds;
+    // Filter by category
+    if (category !== 'all') {
+      filtered = filtered.filter((product) => product.category === category);
     }
 
-    return allProds.filter((product) => product.category === category);
+    // Filter by search query
+    if (query) {
+      filtered = filtered.filter(
+        (product) =>
+          product.name.toLowerCase().includes(query) ||
+          product.description.toLowerCase().includes(query) ||
+          product.shortDescription.toLowerCase().includes(query)
+      );
+    }
+
+    return filtered;
   });
 
   // Read-only signals
   readonly products = this.allProducts.asReadonly();
   readonly currentCategory = this.selectedCategory.asReadonly();
+  readonly currentSearchQuery = this.searchQuery.asReadonly();
 
   setCategory(category: string) {
     this.selectedCategory.set(category);
+  }
+
+  setSearchQuery(query: string) {
+    this.searchQuery.set(query);
+  }
+
+  clearSearch() {
+    this.searchQuery.set('');
   }
 
   // For future API integration

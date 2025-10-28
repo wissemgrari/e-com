@@ -16,4 +16,9 @@ export const routes: Routes = [
     path: 'products',
     loadComponent: () => import('./features/products/products.component').then((c) => c.Products),
   },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./core/pages/not-found/not-found.component').then((c) => c.NotFound),
+  },
 ];

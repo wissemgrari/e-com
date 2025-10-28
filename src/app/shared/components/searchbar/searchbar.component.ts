@@ -44,11 +44,11 @@ export class Searchbar implements OnDestroy {
   private router = inject(Router);
 
   searchQuery = '';
-  private searchSubject = new Subject<string>();
+  private searchQuery$ = new Subject<string>();
   private destroy$ = new Subject<void>();
 
   constructor() {
-    this.searchSubject
+    this.searchQuery$
     .pipe(
         debounceTime(300),
         distinctUntilChanged(),
@@ -67,7 +67,7 @@ export class Searchbar implements OnDestroy {
   }
 
   onSearchChange() {
-    this.searchSubject.next(this.searchQuery);
+    this.searchQuery$.next(this.searchQuery);
   }
 
   onSearch() {
@@ -83,7 +83,7 @@ export class Searchbar implements OnDestroy {
   clearSearch() {
     this.searchQuery = '';
     this.productService.clearSearch();
-    this.searchSubject.next(''); // Trigger debounced clear
+    this.searchQuery$.next(''); // Trigger debounced clear
 
     this.router.navigate([], {
       queryParams: {search: null},

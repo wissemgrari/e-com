@@ -11,7 +11,7 @@ import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
   selector: 'searchbar',
   standalone: true,
   imports: [NgIcon, FormsModule],
-  viewProviders: [provideIcons({lucideSearch, lucideX})],
+  viewProviders: [provideIcons({ lucideSearch, lucideX })],
   template: `
     <div
         class="hidden sm:flex items-center gap-2 rounded-full ring-1 ring-gray-200 px-3 py-2 shadow-md bg-white"
@@ -59,7 +59,7 @@ export class Searchbar implements OnDestroy {
 
       if (!this.router.url.includes('/products')) {
         this.router.navigate(['/products'], {
-          queryParams: {search: query || undefined},
+          queryParams: { search: query || undefined },
           queryParamsHandling: 'merge',
         });
       }
@@ -75,7 +75,7 @@ export class Searchbar implements OnDestroy {
 
     // Navigate to products page
     this.router.navigate(['/products'], {
-      queryParams: {search: this.searchQuery || undefined},
+      queryParams: { search: this.searchQuery || undefined },
       queryParamsHandling: 'merge',
     });
   }
@@ -86,7 +86,7 @@ export class Searchbar implements OnDestroy {
     this.searchQuery$.next(''); // Trigger debounced clear
 
     this.router.navigate([], {
-      queryParams: {search: null},
+      queryParams: { search: null },
       queryParamsHandling: 'merge',
       relativeTo: this.router.routerState.root,
     });

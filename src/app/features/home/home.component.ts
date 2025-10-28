@@ -8,7 +8,7 @@ import { RouterLink } from '@angular/router';
   imports: [ProductList, NgOptimizedImage, RouterLink],
   template: `
     <div class="relative aspect-[3/1] mb-12">
-      <img ngSrc="/featured.png" alt="Featured Product" height="576" width="1728" priority />
+      <img ngSrc="/banner.png" alt="Featured Product" height="576" width="1728" priority />
     </div>
     <product-list />
     <a routerLink="products" class="flex justify-end mt-4 underline text-sm text-gray-500">
